@@ -36,3 +36,5 @@ Thumbs.db
 *.tar
 *.7z
 *.rar
+
+jenkins/jenkins_data/
