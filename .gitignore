@@ -1,0 +1,38 @@
+# --- MongoDB Local Data ---
+mongodb/data/
+mongodb/logs/
+*/journal/
+
+# --- Jenkins Home (NE JAMAIS mettre dans git) ---
+jenkins/jenkins_home/
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.log
+venv/
+env/
+
+# --- Logs ---
+*.log
+logs/
+*.out
+
+# --- Node / Web ---
+node_modules/
+dist/
+build/
+
+# --- Docker ---
+*.pid
+*.sock
+
+# --- System ---
+.DS_Store
+Thumbs.db
+
+# --- Others ---
+*.zip
+*.tar
+*.7z
+*.rar
