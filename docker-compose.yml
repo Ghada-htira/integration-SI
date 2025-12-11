@@ -1,0 +1,64 @@
+version: '3.8'
+services:
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: unless-stopped
+    networks:
+      - bis_network
+    ports:
+      - "8085:8080"   # Jenkins web UI sur l'hôte 8085
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # pour contrôler Docker depuis Jenkins
+      - jenkins_configs:/etc/jenkins_config
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: unless-stopped
+    networks:
+      - bis_network
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  nginx_web_1:
+    build: ./nginx-site
+    container_name: nginx_web_1
+    networks:
+      - bis_network
+    ports:
+      - "8080:80"   # map 80 container -> 8080 host
+      - "8443:443"  # map 443 container -> 8443 host
+    volumes:
+      - ./nginx-site/site:/usr/share/nginx/html:ro
+    depends_on:
+      - mongo
+
+  nginx_web_2:
+    build: ./nginx-site
+    container_name: nginx_web_2
+    networks:
+      - bis_network
+    ports:
+      - "8081:80"
+      - "8444:443"
+    volumes:
+      - ./nginx-site/site:/usr/share/nginx/html:ro
+    depends_on:
+      - mongo
+
+networks:
+  bis_network:
+    external: true
+
+volumes:
+  jenkins_home:
+  jenkins_configs:
+  mongo_data:
