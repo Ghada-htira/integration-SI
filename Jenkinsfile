@@ -13,19 +13,6 @@ pipeline {
             }
         }
 
-        stage('Install Python & Pymongo') {
-            steps {
-                sh '''
-                    echo "Installing Python3 and Pymongo..."
-
-                    apt-get update -y
-                    apt-get install -y python3 python3-pip
-
-                    pip3 install pymongo
-                '''
-            }
-        }
-
         stage('Generate HTML') {
             steps {
                 sh '''
