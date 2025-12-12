@@ -8,4 +8,7 @@ RUN apt-get update && \
     pip3 install --no-cache-dir --break-system-packages pymongo && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+    # Install Docker client
+RUN curl -fsSL https://get.docker.com | sh
+
 USER jenkins
