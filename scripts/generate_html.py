@@ -5,7 +5,7 @@ import os
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://mongodb:27017')
 DB = os.getenv('MONGO_DB', 'testdb')
 COL = os.getenv('MONGO_COLLECTION', 'restaurants')
-OUT_PATH = os.getenv('OUT_PATH', '../nginx-site/site/index.html')
+OUT_PATH = os.getenv('OUT_PATH', 'nginx-site/site/index.html')
 
 client = MongoClient(MONGO_URI)
 db = client[DB]
