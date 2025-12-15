@@ -18,7 +18,11 @@ html += "<h1>Restaurants — collection</h1>\n"
 html += "<ul>\n"
 for d in docs:
     name = d.get('name','-')
-    addr = d.get('address','-')
+    address = d.get('address', {})
+    street = address.get('street', '')
+    building = address.get('building', '')
+    zipcode = address.get('zipcode', '')
+    addr = f"{building} {street} {zipcode}"
     html += f"<li><strong>{name}</strong> — {addr}</li>\n"
 html += "</ul>\n"
 html += "</body></html>"
